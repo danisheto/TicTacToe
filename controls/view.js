@@ -6,7 +6,6 @@ var makeControlsView=function(initialBoardModel, initialControlsController){
 	var button=document.createElement("a");
 	button.href="javascript:void(0)";
 	button.classList.add("btn");
-	button.style.display="none";
 	button.innerText="New Game";
 	element.appendChild(button);
 
@@ -16,8 +15,9 @@ var makeControlsView=function(initialBoardModel, initialControlsController){
 
 	var boardObserver=function(){
 		if(typeof boardModel.getWinner()=="object"){
-			console.log('lkj')
 			button.style.display="";
+		}else{
+			hideButton();
 		}
 	}
 
@@ -42,6 +42,10 @@ var makeControlsView=function(initialBoardModel, initialControlsController){
 	setBoardModel(initialBoardModel);
 	setControlsController(initialControlsController);
 
+	var hideButton=function(){
+		button.style.display="none";
+	}
+	hideButton();
 	return {
 		getElement:function(){
 			return element;

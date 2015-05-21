@@ -9,6 +9,10 @@ var makeBoardModel=function(){
             grid[i][j]=undefined;//cell
         }
     }
+
+    var oScore=0;
+    var xScore=0;
+
     var observableSubject = makeObservableSubject();
     var notifyObservers = observableSubject.notifyObservers;
 
@@ -29,19 +33,22 @@ var makeBoardModel=function(){
         if(grid[x][0]==grid[x][1] && grid[x][1]==grid[x][2] && grid[x][y]!=undefined){
             //check for vertical win
             winner=[x,y,"vertical"];
-
+            grid[x][y]=="X"?xScore++:oScore++;
             notifyObservers();
         }else if(grid[0][y]==grid[1][y] && grid[1][y]==grid[2][y] && grid[x][y]!=undefined){
             //check for horizontal win
             winner=[x,y,"horizontal"];
+            grid[x][y]=="X"?xScore++:oScore++;
             notifyObservers();
         }else if(grid[0][0]==grid[1][1] && grid[1][1]==grid[2][2] && grid[1][1]!=undefined){
             //check for left-right diagonal win
             winner=[x,y,"rl-diag"];
+            grid[x][y]=="X"?xScore++:oScore++;
             notifyObservers();
         }else if(grid[2][0]==grid[1][1] && grid[1][1]==grid[0][2] && grid[1][1]!=undefined){
             //check for right-left diagonal win
             winner=[x,y,"lr-diag"];
+            grid[x][y]=="X"?xScore++:oScore++;
             notifyObservers();
         }
         if(marks==9){
@@ -70,6 +77,12 @@ var makeBoardModel=function(){
     var getWinner=function(){
         return winner;
     }
+    var getXScore=function(){
+        return xScore;
+    }
+    var getOScore=function(){
+        return oScore;
+    }
 
     return {
         addObserver:observableSubject.addObserver,
@@ -77,6 +90,8 @@ var makeBoardModel=function(){
         mark:mark,
         getBoard:getBoard,
         getWinner:getWinner,
-        resetGame:resetGame
+        resetGame:resetGame,
+        getXScore:getXScore,
+        getOScore:getOScore
     }
 }

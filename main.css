@@ -1,0 +1,29 @@
+html,body{
+	min-height:100%;
+}
+#content{
+	text-align:center;
+}
+canvas{
+	cursor:pointer;
+}
+.btn:link, .btn:visited{
+	margin-top:16px;
+	font-family:"Open Sans", sans-serif;
+	display:inline-block;
+	text-decoration:none;
+	color:black;
+	background-color:#333;
+	color:#FFF;
+	padding:6px 8px;
+	border-radius:1px;
+	border-bottom:solid 3px #BBB;
+}
+.btn:hover{
+	border-bottom-width:2px;
+	margin-top:17px;
+}
+.btn:active{
+	border-bottom-width:1px;
+	margin-top:18px;
+}

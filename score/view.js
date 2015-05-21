@@ -1,11 +1,11 @@
-var makeScoreView=function(initialScoreModel){
-	var scoreModel;
+var makeScoreView=function(initialBoardModel){
+	var boardModel;
 
 	var rootElement = document.createElement("div");
-	var xScoreElement = document.createElement("p");
-	var oScoreElement = document.createElement("p");
-	rootElement.appendChild(xScore);
-	rootElement.appendChild(oScore)
+	var xScoreElement = document.createElement("div");
+	var oScoreElement = document.createElement("div");
+	rootElement.appendChild(xScoreElement);
+	rootElement.appendChild(oScoreElement);
 
 	var updateScore=function(xScore, oScore){
 		xScoreElement.innerText = "X Score: " + xScore;
@@ -13,17 +13,23 @@ var makeScoreView=function(initialScoreModel){
 	}
 
 	var scoreObserver=function(){
-		updateScore(scoreModel.getXScore(), scoreModel.getOScore());
+		updateScore(boardModel.getXScore(), boardModel.getOScore());
 	}
 
-	var setScoreModel=function(model){
+	var setBoardModel=function(model){
 		if(!model){
 			throw new Error("must supply a model")
 		}
-		if(scoreModel){
-			scoreModel.removeObserver(scoreObserver);
+		if(boardModel){
+			boardModel.removeObserver(scoreObserver);
 		}
-		scoreModel = model;
-		scoreModel.addObserver(scoreObserver);
+		boardModel = model;
+		boardModel.addObserver(scoreObserver);
+	}
+	setBoardModel(initialBoardModel)
+	return {
+		getElement:function(){
+			return rootElement;
+		}
 	}
 }

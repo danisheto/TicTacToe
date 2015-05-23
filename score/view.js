@@ -26,7 +26,10 @@ var makeScoreView=function(initialBoardModel){
 		boardModel = model;
 		boardModel.addObserver(scoreObserver);
 	}
-	setBoardModel(initialBoardModel)
+	setBoardModel(initialBoardModel);
+
+	updateScore(0,0);
+	
 	return {
 		getElement:function(){
 			return rootElement;
